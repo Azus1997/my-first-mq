@@ -25,15 +25,12 @@ while int(spentTime) <= 15:
     if n < goalChance:
         goalCount = goalCount + 1
         goalChance = 0
-        channel.basic_publish(exchange='',
-                      routing_key='football-match',
-                      body=('Goal!' + str(goalCount)))
+        channel.basic_publish(exchange='', routing_key='football-match', body=('Goal!' + str(goalCount)))
                       
     time.sleep(1)
 
     spentTime = time.time() - oTime
 
-channel.basic_publish(exchange='',
-                      routing_key='football-match',
-                      body=('EOM'))
+channel.basic_publish(exchange='', routing_key='football-match', body=('EOM'))
+
 connection.close()
