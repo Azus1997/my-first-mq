@@ -16,7 +16,6 @@ def radioLisen():
     channel.start_consuming()
 
 
-
 def callback(ch, method, properties, body):
         print(f" What a magnificent {body}")
 
