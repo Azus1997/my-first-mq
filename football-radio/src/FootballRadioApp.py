@@ -5,7 +5,7 @@ import os
 
 def radioLisen():
 
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost:5672'))
     channel = connection.channel()
 
     channel.queue_declare(queue='football-match')

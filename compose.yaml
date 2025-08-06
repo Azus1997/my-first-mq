@@ -1,0 +1,18 @@
+services:
+
+    rabbitmq:
+        image: rabbitmq
+        command: rabbitmq-server
+        ports:
+          - "5672:5672"
+          - "15672:15672"
+
+    my-first-mq:
+        image: my-fist-mq
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - rabbitmq
+        ports:
+          - "8080:8080"
