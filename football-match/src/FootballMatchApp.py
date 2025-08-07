@@ -5,7 +5,14 @@ import time
 import asyncio
 import pika
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost')) #change localhost for IP address in case of remote connection
+parameters = pika.ConnectionParameters(
+    host = 'rabbitmq',
+    port=5672,
+    virtual_host = 'local',
+    credentials= pika.PlainCredentials('user', 'password')
+)
+
+connection = pika.BlockingConnection(parameters)
 channel = connection.channel()
 
 channel.queue_declare(queue='football-match')
