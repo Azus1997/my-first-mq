@@ -3,9 +3,16 @@ import pika
 import sys
 import os
 
+parameters = pika.ConnectionParameters(
+    host = 'rabbitmq',
+    port=5672,
+    virtual_host = 'local',
+    credentials= pika.PlainCredentials('user', 'password')
+)
+
 def radioLisen():
 
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost:5672'))
+    connection = pika.BlockingConnection(parameters)
     channel = connection.channel()
 
     channel.queue_declare(queue='football-match')

@@ -1,18 +1,39 @@
 services:
 
     rabbitmq:
-        image: rabbitmq
+        image: rabbitmq:management
         command: rabbitmq-server
+        environment:
+            - RABBITMQ_DEFAULT_VHOST=local
+            - RABBITMQ_DEFAULT_USER=user
+            - RABBITMQ_DEFAULT_PASS=password
         ports:
-          - "5672:5672"
-          - "15672:15672"
+            - "5671:5671"
+            - "5672:5672"
+            - "25672:25672"
+            - "15671:15671"
+            - "15672:15672"
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:15672"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
 
     my-first-mq:
         image: my-fist-mq
         build:
             context: .
             dockerfile: Dockerfile
+        environment:
+            - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
         depends_on:
             - rabbitmq
+        links: 
+            - rabbitmq
         ports:
-          - "8080:8080"
+            - "8080:8080"
+
+networks:
+  default:
+    driver: bridge
