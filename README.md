@@ -15,7 +15,7 @@ Somewhere down the line I decided *"Yes, it IS a great idea to implement Docker 
  2. opening a terminal
  3. changing the location to the cloned repo's folder
  4. running the following command
- ´´   docker compose up -d
+ ´´´   docker compose up -d
 
 Unfortunately this does mean that **Docker IS a requirement**. But if I didn´t mess things up, nothing else should be.
 
